@@ -18,6 +18,7 @@ SOURCES += \
 HEADERS += \
     authentication.h \
     booksinfo.h \
+    config.h \
     database.h \
     mainwindow.h
 

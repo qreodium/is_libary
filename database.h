@@ -7,13 +7,19 @@
 class database : public QMainWindow
 {
     Q_OBJECT
+
+
+private:
+    int maxBooks;
+    int maxReaders;
+    int maxEmployee;
+    int maxBusyBooks;
+
 public:
     explicit database(QWidget *parent = nullptr);
     int test();
     booksinfo* book = new booksinfo("QString _bookTitle", "QString _author", 56, 555, 100);
-
-private:
-
+    booksinfo* book_new = new booksinfo();
 
 signals:
 

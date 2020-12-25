@@ -9,8 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->tableBooks->setRowCount(11);
     QTableWidgetItem* item = new QTableWidgetItem;
-    database* t = new database;
-    item->setText(t->book->getAuthor());
+    database* t = new database(this);
+    item->setText(t->book_new->getBookTitle());
     ui->tableBooks->setItem(1,1,item);
 }
 

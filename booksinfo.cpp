@@ -1,4 +1,6 @@
 #include "booksinfo.h"
+#include "config.h"
+#include <QDebug>
 
 booksinfo::booksinfo()
 {
@@ -14,36 +16,35 @@ booksinfo::booksinfo(QString _bookTitle, QString _author, int _numberOfPages, in
     uniqueCode =_uniqueCode;
 }
 
-booksinfo booksinfo::getInfo(int number)
+void booksinfo::loadInfo(int number)
 {
-    QFile file("booksinfo.bin");
-    if(file.open(QIODevice::ReadOnly))
-    {
-        QDataStream stream(&file);
-        stream.setVersion (QDataStream::Qt_4_2) ;
-        stream >> bookTitle >> author >> numberOfPages >> cost >> uniqueCode;
-        if(stream.status() != QDataStream::Ok)
-        {
-            qDebug() << "Ошибка чтения файла";
-        }
-    file.close();
+    QFile file(Config::fileBooks);
+    if (file.open(QIODevice::ReadOnly)) {
+        file.seek(86*number);// прочитать структуру под номером number. (1 структура - 86 байт)
+        QDataStream ist(&file);
+            ist >> *this;
     }
+    file.close();
 }
 
-void booksinfo::setInfo(int number)
+void booksinfo::saveInfo(int number)
 {
-    QFile file("booksinfo.bin");
-    if(file.open(QIODevice::WriteOnly))
-    {
-        QDataStream stream(&file);
-        stream.setVersion(QDataStream::Qt_4_2);
-        stream << bookTitle << author << numberOfPages << cost << uniqueCode;
-        if(stream.status() != QDataStream::Ok)
-        {
-            qDebug() << "Ошибка записи";
-        }
-    }
+    QFile file(Config::fileBooks);
+    if (!file.open(QFile::WriteOnly))
+      qDebug() << "error = " << file.error();
+    file.seek(86*number);
+    QDataStream ost(&file);
+    ost << *this;
     file.close();
+}
+
+void booksinfo::setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode)
+{
+    bookTitle=_bookTitle;
+    author=_author;
+    numberOfPages = _numberOfPages;
+    cost=_cost;
+    uniqueCode =_uniqueCode;
 }
 
 QString booksinfo::getBookTitle() const
