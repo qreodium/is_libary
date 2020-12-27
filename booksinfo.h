@@ -2,7 +2,6 @@
 #define BOOKSINFO_H
 
 #include <QString>
-#include <QFile>
 #include <QDataStream>
 #include <QDebug>
 
@@ -14,13 +13,11 @@ private:
     QString author;
     int numberOfPages;
     int cost;
-    int uniqueCode;
+    QString uniqueCode;
 public:
     booksinfo();
-    booksinfo(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode);
-    void loadInfo(int number);
-    void saveInfo(int number);
-    void setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode);
+    booksinfo(QString _bookTitle, QString _author, int _numberOfPages, int _cost, QString _uniqueCode);
+    void setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, QString _uniqueCode);
     QString getBookTitle() const;
     void setBookTitle(const QString &value);
     QString getAuthor() const;
@@ -29,7 +26,7 @@ public:
     void setNumberOfPages(int value);
     int getCost() const;
     void setCost(int value);
-    int getUniqueCode() const;
+    QString getUniqueCode() const;
     void setUniqueCode(int value);
 };
 
@@ -46,7 +43,7 @@ inline QDataStream &operator>> (QDataStream &ist, booksinfo &booksinfo)
     QString author;
     int numberOfPages;
     int cost;
-    int uniqueCode;
+    QString uniqueCode;
 
     ist >> bookTitle >> author >> numberOfPages >> cost >> uniqueCode;
     booksinfo.setData(bookTitle, author, numberOfPages, cost, uniqueCode);

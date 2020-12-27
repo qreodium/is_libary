@@ -17,9 +17,10 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void deliveryDatabase(database* _db);
 private:
+    database* db;
     void updateTableBooks();
-    database db;
 
 private slots:
     void clickedTable(int row, int column);

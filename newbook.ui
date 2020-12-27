@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>541</width>
-    <height>310</height>
+    <height>318</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>10</x>
      <y>10</y>
      <width>521</width>
-     <height>291</height>
+     <height>301</height>
     </rect>
    </property>
    <property name="title">
@@ -31,7 +31,7 @@
       <x>0</x>
       <y>20</y>
       <width>511</width>
-      <height>256</height>
+      <height>276</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -63,7 +63,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_bookPageCount"/>
+      <widget class="QSpinBox" name="spinBox_bookPages">
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <number>99999999</number>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_cost">
@@ -73,7 +80,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_bookCost"/>
+      <widget class="QSpinBox" name="spinBox_bookCost">
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::NoButtons</enum>
+       </property>
+       <property name="maximum">
+        <number>99999999</number>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_uniqueCode">

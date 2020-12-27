@@ -15,7 +15,7 @@ newBook::~newBook()
 
 booksinfo newBook::create()
 {
-    booksinfo book(ui->lineEdit_bookTitle->text(),ui->lineEdit_bookAuthor->text(),ui->lineEdit_bookPageCount->text().toUInt(),
-                   ui->lineEdit_bookCost->text().toUInt(),ui->lineEdit_bookUniqueCode->text().toUInt());
+    booksinfo book(ui->lineEdit_bookTitle->text(),ui->lineEdit_bookAuthor->text(),ui->spinBox_bookPages->text().toUInt(),
+                   ui->spinBox_bookCost->text().toUInt(),ui->lineEdit_bookUniqueCode->text());
     return book;
 }

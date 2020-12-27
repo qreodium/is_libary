@@ -7,7 +7,7 @@ booksinfo::booksinfo()
 
 }
 
-booksinfo::booksinfo(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode)
+booksinfo::booksinfo(QString _bookTitle, QString _author, int _numberOfPages, int _cost, QString _uniqueCode)
 {
     bookTitle=_bookTitle;
     author=_author;
@@ -17,7 +17,7 @@ booksinfo::booksinfo(QString _bookTitle, QString _author, int _numberOfPages, in
 }
 
 
-void booksinfo::setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode)
+void booksinfo::setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, QString _uniqueCode)
 {
     bookTitle=_bookTitle;
     author=_author;
@@ -66,7 +66,7 @@ void booksinfo::setCost(int value)
     cost = value;
 }
 
-int booksinfo::getUniqueCode() const
+QString booksinfo::getUniqueCode() const
 {
     return uniqueCode;
 }

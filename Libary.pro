@@ -14,7 +14,8 @@ SOURCES += \
     database.cpp \
     main.cpp \
     mainwindow.cpp \
-    newbook.cpp
+    newbook.cpp \
+    workersinfo.cpp
 
 HEADERS += \
     authentication.h \
@@ -22,7 +23,8 @@ HEADERS += \
     config.h \
     database.h \
     mainwindow.h \
-    newbook.h
+    newbook.h \
+    workersinfo.h
 
 FORMS += \
     authentication.ui \

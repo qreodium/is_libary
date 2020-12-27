@@ -1,5 +1,7 @@
 #include "authentication.h"
 #include "ui_authentication.h"
+#include "mainwindow.h"
+
 
 authentication::authentication(QWidget *parent) :
     QDialog(parent),
@@ -16,10 +18,22 @@ authentication::~authentication()
 
 void authentication::checkPassword()
 {
-    if(ui->line_login->text() == "q")
+    database* db = new database();
+    db->loadWorkers();
+    qDebug() << db->workers.count();
+    for(int i = 0; i<db->workers.count(); i++)
     {
-        hide();
-        mui = new MainWindow();
-        mui->show();
+        if((ui->line_login->text() == db->workers[i].getLogin())&&(ui->line_password->text() == db->workers[i].getPassword()))
+        {
+            if(db->workers[i].getAdministrator())
+                db->userRank = 1;
+            else
+                db->userRank = 2;
+            hide();
+            mui = new MainWindow();
+            mui->deliveryDatabase(db);
+            mui->show();
+        }
     }
 }
+
