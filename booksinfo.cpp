@@ -16,27 +16,6 @@ booksinfo::booksinfo(QString _bookTitle, QString _author, int _numberOfPages, in
     uniqueCode =_uniqueCode;
 }
 
-void booksinfo::loadInfo(int number)
-{
-    QFile file(Config::fileBooks);
-    if (file.open(QIODevice::ReadOnly)) {
-        file.seek(86*number);// прочитать структуру под номером number. (1 структура - 86 байт)
-        QDataStream ist(&file);
-            ist >> *this;
-    }
-    file.close();
-}
-
-void booksinfo::saveInfo(int number)
-{
-    QFile file(Config::fileBooks);
-    if (!file.open(QFile::WriteOnly))
-      qDebug() << "error = " << file.error();
-    file.seek(86*number);
-    QDataStream ost(&file);
-    ost << *this;
-    file.close();
-}
 
 void booksinfo::setData(QString _bookTitle, QString _author, int _numberOfPages, int _cost, int _uniqueCode)
 {

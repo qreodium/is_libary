@@ -3,12 +3,35 @@
 
 database::database(QWidget *parent) : QMainWindow(parent)
 {
-    book->saveInfo(0);
-    book_new->loadInfo(0);
-    book_new->saveInfo(1);
+
 }
 
-int database::test()
+void database::loadBooks()
 {
-    return 228;
+    QFile file(Config::fileBooks);
+    books.clear();
+    booksinfo tmp;
+    if (file.open(QIODevice::ReadOnly)) {
+        QDataStream ist(&file);
+        while (!ist.atEnd()) {//перебираем весь файл и записываем инф. о каждой книге
+            ist >> tmp;
+            books.append(tmp);
+        }
+        file.close();
+    }
 }
+
+void database::saveBooks()
+{
+    QFile file(Config::fileBooks);
+    if (file.open(QIODevice::WriteOnly)) {
+        QDataStream ost(&file);
+        for(int i = books.count(); i > 0; i--) {//перебираем весь файл и записываем инф. о каждой книге
+            ost << books[i];
+        }
+        file.close();
+    }
+}
+
+
+

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <booksinfo.h>
+#include <QList>
 
 class database : public QMainWindow
 {
@@ -10,16 +11,13 @@ class database : public QMainWindow
 
 
 private:
-    int maxBooks;
-    int maxReaders;
-    int maxEmployee;
-    int maxBusyBooks;
+
 
 public:
+    QList<booksinfo> books;
     explicit database(QWidget *parent = nullptr);
-    int test();
-    booksinfo* book = new booksinfo("QString _bookTitle", "QString _author", 56, 555, 100);
-    booksinfo* book_new = new booksinfo();
+    void loadBooks();
+    void saveBooks();
 
 signals:
 

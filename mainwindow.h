@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "booksinfo.h"
+#include "database.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +17,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private:
+    void updateTableBooks();
+    database db;
+
+private slots:
+    void clickedTable(int row, int column);
+    void createNewBook();
 
 private:
     Ui::MainWindow *ui;

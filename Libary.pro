@@ -13,18 +13,21 @@ SOURCES += \
     booksinfo.cpp \
     database.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newbook.cpp
 
 HEADERS += \
     authentication.h \
     booksinfo.h \
     config.h \
     database.h \
-    mainwindow.h
+    mainwindow.h \
+    newbook.h
 
 FORMS += \
     authentication.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    newbook.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
