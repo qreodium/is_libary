@@ -19,6 +19,7 @@ SOURCES += \
     newbook.cpp \
     newuser.cpp \
     readersinfo.cpp \
+    rentedinfo.cpp \
     workersinfo.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     newbook.h \
     newuser.h \
     readersinfo.h \
+    rentedinfo.h \
     workersinfo.h
 
 FORMS += \

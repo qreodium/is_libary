@@ -38,7 +38,56 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonGiveBook</sender>
+   <signal>clicked()</signal>
+   <receiver>editBook</receiver>
+   <slot>clickedFirst()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonTakeBook</sender>
+   <signal>clicked()</signal>
+   <receiver>editBook</receiver>
+   <slot>clickedSecond()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>editBook</receiver>
+   <slot>clickedThird()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>clickedFirst()</slot>
   <slot>clickedSecond()</slot>

@@ -77,6 +77,7 @@ void MainWindow::clickedTableBook(int row)
     window.setModal(true);
     if(window.exec() == QDialog::Accepted)
     {
+        qDebug() << "Accepted";
         if(window.getResult()==2)
         {
             db->books.removeAt(row);
