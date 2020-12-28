@@ -20,7 +20,7 @@ void authentication::checkPassword()
 {
     database* db = new database();
     db->loadWorkers();
-    qDebug() << db->workers.count();
+    db->loadReaders();
     for(int i = 0; i<db->workers.count(); i++)
     {
         if((ui->line_login->text() == db->workers[i].getLogin())&&(ui->line_password->text() == db->workers[i].getPassword()))
@@ -29,6 +29,16 @@ void authentication::checkPassword()
                 db->userRank = 1;
             else
                 db->userRank = 2;
+            hide();
+            mui = new MainWindow();
+            mui->deliveryDatabase(db);
+            mui->show();
+        }
+    }
+    for(int i = 0; i<db->readers.count(); i++)
+    {
+        if((ui->line_login->text() == db->readers[i].getLogin())&&(ui->line_password->text() == db->readers[i].getPassword()))
+        {
             hide();
             mui = new MainWindow();
             mui->deliveryDatabase(db);

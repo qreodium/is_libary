@@ -25,6 +25,7 @@ private:
 private slots:
     void clickedTable(int row, int column);
     void createNewBook();
+    void createNewUser();
 
 private:
     Ui::MainWindow *ui;

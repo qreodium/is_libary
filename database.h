@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <booksinfo.h>
 #include <workersinfo.h>
+#include <readersinfo.h>
 #include <QList>
 
 class database : public QMainWindow
@@ -18,11 +19,15 @@ public:
     int userRank = 0;
     QList<booksinfo> books;
     QList<workersinfo> workers;
+    QList<readersinfo> readers;
+
     explicit database(QWidget *parent = nullptr);
     void loadBooks();
     void saveBooks();
     void loadWorkers();
     void saveWorkers();
+    void loadReaders();
+    void saveReaders();
 
 signals:
 

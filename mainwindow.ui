@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
-    <height>354</height>
+    <width>817</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ИС Библиотека</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -83,6 +83,30 @@
           </column>
          </widget>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonBook">
+            <property name="text">
+             <string>Добавить книгу</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="Peoples">
@@ -91,35 +115,73 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QTableWidget" name="tablePepole"/>
+         <widget class="QTableWidget" name="tablePepole">
+          <property name="minimumSize">
+           <size>
+            <width>775</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="showGrid">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Фамилия</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Имя</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Должность</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Домашний адрес</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Номер чит. билета</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonPeople">
+            <property name="text">
+             <string>Добавить пользователя</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
      </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Добавить книгу</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>
@@ -128,7 +190,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>818</width>
+     <width>817</width>
      <height>21</height>
     </rect>
    </property>
@@ -158,7 +220,7 @@
    <sender>tableBooks</sender>
    <signal>cellDoubleClicked(int,int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>clicked(int,int)</slot>
+   <slot>clickedTable(int,int)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>278</x>
@@ -171,7 +233,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>pushButtonBook</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>createNewBook()</slot>
@@ -186,9 +248,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButtonPeople</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>createNewUser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>408</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>clickedTable(int,int)</slot>
   <slot>createNewBook()</slot>
+  <slot>createNewUser()</slot>
  </slots>
 </ui>

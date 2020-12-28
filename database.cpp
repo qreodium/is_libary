@@ -49,7 +49,7 @@ void database::loadWorkers()
     }
     if(workers.count()==0)// Если нет записей добавляем системную запись администратора
     {
-        tmp.setData("system","system","system",true,"no","root","228");
+        tmp.setData("system","system","system",true,"-","root","228");
         workers.append(tmp);
         saveWorkers();
     }
@@ -67,5 +67,32 @@ void database::saveWorkers()
     }
 }
 
+
+void database::loadReaders()
+{
+    QFile file(Config::fileReaders);
+    readers.clear();
+    readersinfo tmp;
+    if (file.open(QIODevice::ReadOnly)) {
+        QDataStream ist(&file);
+        while (!ist.atEnd()) {//перебираем весь файл и записываем инф. о каждой книге
+            ist >> tmp;
+            readers.append(tmp);
+        }
+        file.close();
+    }
+}
+
+void database::saveReaders()
+{
+    QFile file(Config::fileReaders);
+    if (file.open(QIODevice::WriteOnly)) {
+        QDataStream ost(&file);
+        for(int i = readers.count()-1; i >= 0; i--) {//перебираем весь файл и записываем инф. о каждой книге
+            ost << readers[i];
+        }
+        file.close();
+    }
+}
 
 
