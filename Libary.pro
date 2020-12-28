@@ -12,6 +12,7 @@ SOURCES += \
     authentication.cpp \
     booksinfo.cpp \
     database.cpp \
+    editbook.cpp \
     edituser.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     booksinfo.h \
     config.h \
     database.h \
+    editbook.h \
     edituser.h \
     mainwindow.h \
     newbook.h \
@@ -34,6 +36,7 @@ HEADERS += \
 
 FORMS += \
     authentication.ui \
+    editbook.ui \
     edituser.ui \
     mainwindow.ui \
     newbook.ui \

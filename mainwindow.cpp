@@ -3,7 +3,12 @@
 #include "database.h"
 #include "newbook.h"
 #include "newuser.h"
+#include "edituser.h"
+#include "editbook.h"
 #include "authentication.h"
+
+#include <QDebug>
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,16 +32,60 @@ void MainWindow::deliveryDatabase(database* _db)
         ui->tabWidget->removeTab(1);
         ui->pushButtonBook->setDisabled(true);
     }
-    updateTableBooks();
+    updateTables();
 }
 
-void MainWindow::clickedTable(int row, int column)
+
+
+void MainWindow::clickedTablePeople(int row)
 {
-    qDebug() << "Clecked";
-    ui->tableBooks->item(row,column)->setText("Clicked");
+    editUser window;
+    window.setModal(true);
+    if(window.exec() == QDialog::Accepted)
+    {
+        if(window.getResult()==0)
+        {
+            if(ui->tablePepole->item(row,3)->text()!="Читатель")
+                QMessageBox::warning(this, "Ошибка","Нельзя выдать книгу работнику.");
+        }
+        else if(window.getResult()==1)
+            {
+                if(ui->tablePepole->item(row,3)->text()!="Читатель")
+                    QMessageBox::warning(this, "Ошибка","Нельзя списать книгу с работника.");
+            }
+        else if(window.getResult()==2)
+        {
+            if(ui->tablePepole->item(row,3)->text()=="Читатель")
+            {
+                db->readers.removeAt(row);
+                db->saveReaders();
+            }
+            else
+            {
+                db->workers.removeAt(row-db->readers.count());
+                db->saveWorkers();
+            }
+            updateTables();
+        }
+    }
 }
 
-void MainWindow::updateTableBooks()
+void MainWindow::clickedTableBook(int row)
+{
+    qDebug() << "mainwindow Row: " << row;
+    editBook window;
+    window.setModal(true);
+    if(window.exec() == QDialog::Accepted)
+    {
+        if(window.getResult()==2)
+        {
+            db->books.removeAt(row);
+            updateTables();
+        }
+    }
+}
+
+void MainWindow::updateTables()
 {
     ui->tableBooks->setRowCount(0);
     for(int i = 0; i < db->books.count(); i++)
@@ -72,27 +121,28 @@ void MainWindow::updateTableBooks()
         ui->tablePepole->setItem(i,0,item_userLastName);
         ui->tablePepole->setItem(i,1,item_userFirstName);
         ui->tablePepole->setItem(i,2,item_userPatronymic);
-        ui->tablePepole->setItem(i,2,item_userRank);
-        ui->tablePepole->setItem(i,3,item_userHomeAddress);
-        ui->tablePepole->setItem(i,4,item_userReaderNumber);
+        ui->tablePepole->setItem(i,3,item_userRank);
+        ui->tablePepole->setItem(i,4,item_userHomeAddress);
+        ui->tablePepole->setItem(i,5,item_userReaderNumber);
     }
 
     for(int i = 0; i < db->readers.count(); i++)
     {
         ui->tablePepole->insertRow(i);
-        qDebug() << db->readers[i].getLastName();
         QTableWidgetItem *item_userLastName = new QTableWidgetItem(db->readers[i].getLastName());
         QTableWidgetItem *item_userFirstName = new QTableWidgetItem(db->readers[i].getFirstName());
         QTableWidgetItem *item_userPatronymic = new QTableWidgetItem(db->readers[i].getPatronymic());
+        QTableWidgetItem *item_userRank = new QTableWidgetItem("Читатель");
         QTableWidgetItem *item_userHomeAddress = new QTableWidgetItem(db->readers[i].getHomeAddress());
-        QTableWidgetItem *item_userReaderNumber = new QTableWidgetItem(db->readers[i].getReaderNumber());
+        QTableWidgetItem *item_userReaderNumber = new QTableWidgetItem(QString::number(db->readers[i].getReaderNumber()));
 
 
         ui->tablePepole->setItem(i,0,item_userLastName);
         ui->tablePepole->setItem(i,1,item_userFirstName);
         ui->tablePepole->setItem(i,2,item_userPatronymic);
-        ui->tablePepole->setItem(i,3,item_userHomeAddress);
-        ui->tablePepole->setItem(i,4,item_userReaderNumber);
+        ui->tablePepole->setItem(i,3,item_userRank);
+        ui->tablePepole->setItem(i,4,item_userHomeAddress);
+        ui->tablePepole->setItem(i,5,item_userReaderNumber);
     }
 }
 
@@ -104,7 +154,7 @@ void MainWindow::createNewBook()
         {
             booksinfo book = window.create();
             db->books.append(book);
-            updateTableBooks();
+            updateTables();
             db->saveBooks();
         }
 }
@@ -121,14 +171,14 @@ void MainWindow::createNewUser()
         {
             readersinfo user = window.createReaders();
             db->readers.append(user);
-            updateTableBooks();
+            updateTables();
             db->saveReaders();
         }
         else
         {
             workersinfo user = window.createWorkers();
             db->workers.append(user);
-            updateTableBooks();
+            updateTables();
             db->saveWorkers();
         }
         }

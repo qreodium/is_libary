@@ -36,6 +36,6 @@ int newuser::isWorker()
 workersinfo newuser::createWorkers()
 {
     workersinfo user(ui->lineEditLastName->text(),ui->lineEditFirstName->text(),
-                     ui->lineEditPatronymic->text(),ui->comboBox->currentIndex(),ui->lineEditHome->text(),ui->lineEditLogin->text(),ui->lineEditPassword->text());
+                     ui->lineEditPatronymic->text(),ui->comboBox->currentIndex()-1,ui->lineEditHome->text(),ui->lineEditLogin->text(),ui->lineEditPassword->text());
     return user;
 }

@@ -1,19 +1,19 @@
-#ifndef EDITUSER_H
-#define EDITUSER_H
+#ifndef EDITBOOK_H
+#define EDITBOOK_H
 
 #include <QDialog>
 
 namespace Ui {
-class editUser;
+class editBook;
 }
 
-class editUser : public QDialog
+class editBook : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit editUser(QWidget *parent = nullptr);
-    ~editUser();
+    explicit editBook(QWidget *parent = nullptr);
+    ~editBook();
     int getResult();
 
 private slots:
@@ -23,7 +23,7 @@ private slots:
 
 private:
     int numberButton;
-    Ui::editUser *ui;
+    Ui::editBook *ui;
 };
 
-#endif // EDITUSER_H
+#endif // EDITBOOK_H

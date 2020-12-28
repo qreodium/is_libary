@@ -20,10 +20,11 @@ public:
     void deliveryDatabase(database* _db);
 private:
     database* db;
-    void updateTableBooks();
+    void updateTables();
 
 private slots:
-    void clickedTable(int row, int column);
+    void clickedTablePeople(int row);
+    void clickedTableBook(int row);
     void createNewBook();
     void createNewUser();
 

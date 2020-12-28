@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="usesScrollButtons">
        <bool>true</bool>
@@ -122,6 +122,12 @@
             <height>0</height>
            </size>
           </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="showGrid">
            <bool>true</bool>
           </property>
@@ -136,6 +142,11 @@
           <column>
            <property name="text">
             <string>Имя</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Отчество</string>
            </property>
           </column>
           <column>
@@ -217,14 +228,14 @@
  <resources/>
  <connections>
   <connection>
-   <sender>tableBooks</sender>
+   <sender>tablePepole</sender>
    <signal>cellDoubleClicked(int,int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>clickedTable(int,int)</slot>
+   <slot>clickedTablePeople(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>278</x>
-     <y>179</y>
+     <x>407</x>
+     <y>182</y>
     </hint>
     <hint type="destinationlabel">
      <x>314</x>
@@ -264,10 +275,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tableBooks</sender>
+   <signal>cellDoubleClicked(int,int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clickedTableBook(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>407</x>
+     <y>182</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>408</x>
+     <y>182</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>clickedTable(int,int)</slot>
+  <slot>clickedTablePeople(int)</slot>
   <slot>createNewBook()</slot>
   <slot>createNewUser()</slot>
+  <slot>clickedTableBook(int)</slot>
  </slots>
 </ui>
