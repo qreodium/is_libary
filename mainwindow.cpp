@@ -61,11 +61,13 @@ void MainWindow::clickedTablePeople(int row)
                 db->readers.removeAt(ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt());
                 db->saveReaders();
             }
-            else
+            else if (db->userRank==2)
             {
                 db->workers.removeAt(ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt());
                 db->saveWorkers();
             }
+            else
+                QMessageBox::warning(this, "Ошибка","Нельзя удалить Работника. \nПозовите Администратора.");
             updateTables();
         }
     }
@@ -73,6 +75,8 @@ void MainWindow::clickedTablePeople(int row)
 
 void MainWindow::clickedTableBook(int row)
 {
+    if(db->userRank)
+    {
     editBook window;
     window.setModal(true);
     if(window.exec() == QDialog::Accepted)
@@ -134,6 +138,7 @@ void MainWindow::clickedTableBook(int row)
             }
             }
         }
+    }
     }
 }
 
@@ -233,6 +238,11 @@ void MainWindow::updateTables()
                           ui->tablePepole->item(i,k)->setBackground(Qt::red);
         }
     }
+}
+
+void MainWindow::updated()
+{
+    updateTables();
 }
 
 void MainWindow::createNewBook()

@@ -204,6 +204,13 @@
       </widget>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonUpdate">
+      <property name="text">
+       <string>Обновить данные</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -295,11 +302,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButtonUpdate</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>updated()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>183</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>clickedTablePeople(int)</slot>
   <slot>createNewBook()</slot>
   <slot>createNewUser()</slot>
   <slot>clickedTableBook(int)</slot>
+  <slot>updated()</slot>
  </slots>
 </ui>

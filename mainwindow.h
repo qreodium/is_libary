@@ -23,6 +23,7 @@ private:
     void updateTables();
 
 private slots:
+    void updated();
     void clickedTablePeople(int row);
     void clickedTableBook(int row);
     void createNewBook();
