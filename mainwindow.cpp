@@ -45,20 +45,19 @@ void MainWindow::clickedTablePeople(int row)
     window.setModal(true);
     if(window.exec() == QDialog::Accepted)
     {
-        if(window.getResult()==0) // выдать книгу
-        {
-            if(ui->tablePepole->item(row,3)->text()!="Читатель")
-                QMessageBox::warning(this, "Ошибка","Нельзя выдать книгу работнику.");
-        }
-        else if(window.getResult()==1) // списать книгу
-            {
-                if(ui->tablePepole->item(row,3)->text()!="Читатель")
-                    QMessageBox::warning(this, "Ошибка","Нельзя списать книгу с работника.");
-            }
-        else if(window.getResult()==2) // удалить пользователя
+         if(window.getResult()==2) // удалить пользователя
         {
             if(ui->tablePepole->item(row,3)->text()=="Читатель")
             {
+                for(int i=0;i<db->rented.count();i++)
+                {
+                    if(db->rented[i].getReaderNumber()==db->readers[ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt()].getReaderNumber())
+                    {
+                        db->rented.removeAt(i);
+                        db->saveRented();
+                        updateTables();
+                    }
+                }
                 db->readers.removeAt(ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt());
                 db->saveReaders();
             }
@@ -80,6 +79,15 @@ void MainWindow::clickedTableBook(int row)
     {
         if(window.getResult()==2)// удалить книгу
         {
+            for(int i=0;i<db->rented.count();i++)
+            {
+                if(db->rented[i].getUniqueCode()==ui->tableBooks->item(row, 4)->text())
+                {
+                    db->rented.removeAt(i);
+                    db->saveRented();
+                    updateTables();
+                }
+            }
             db->books.removeAt(ui->tableBooks->item(row, 0)->data(Qt::UserRole).toUInt());
             updateTables();
         }
@@ -149,6 +157,7 @@ void MainWindow::updateTables()
             {
                 item_bookReaderNumber->setText(QString::number(db->rented[j].getReaderNumber()));
                 item_bookStartDate->setText(db->rented[j].getStart().toString(Qt::ISODate));
+                item_bookStartDate->setData(Qt::UserRole,j);
                 item_bookEndDate->setText(db->rented[j].getEnd().toString(Qt::ISODate));
             }
         }
@@ -163,6 +172,14 @@ void MainWindow::updateTables()
         ui->tableBooks->setItem(i,5,item_bookReaderNumber);
         ui->tableBooks->setItem(i,6,item_bookStartDate);
         ui->tableBooks->setItem(i,7,item_bookEndDate);
+
+        for(int j = 0; j < db->rented.count(); j++)
+        {
+            if(db->books[i].getUniqueCode()==db->rented[j].getUniqueCode())
+                 if(db->rented[j].getEnd()<QDate::currentDate())
+                      for(int k =0; k<8; k++)
+                          ui->tableBooks->item(i,k)->setBackground(Qt::red);
+        }
 
 
 
@@ -207,6 +224,14 @@ void MainWindow::updateTables()
         ui->tablePepole->setItem(i,3,item_userRank);
         ui->tablePepole->setItem(i,4,item_userHomeAddress);
         ui->tablePepole->setItem(i,5,item_userReaderNumber);
+
+        for(int j = 0; j < db->rented.count(); j++)
+        {
+            if(db->readers[i].getReaderNumber()==db->rented[j].getReaderNumber())
+                 if(db->rented[j].getEnd()<QDate::currentDate())
+                      for(int k =0; k<6; k++)
+                          ui->tablePepole->item(i,k)->setBackground(Qt::red);
+        }
     }
 }
 
