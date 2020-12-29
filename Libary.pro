@@ -20,6 +20,7 @@ SOURCES += \
     newuser.cpp \
     readersinfo.cpp \
     rentedinfo.cpp \
+    selectreader.cpp \
     workersinfo.cpp
 
 HEADERS += \
@@ -34,6 +35,7 @@ HEADERS += \
     newuser.h \
     readersinfo.h \
     rentedinfo.h \
+    selectreader.h \
     workersinfo.h
 
 FORMS += \
@@ -42,7 +44,8 @@ FORMS += \
     edituser.ui \
     mainwindow.ui \
     newbook.ui \
-    newuser.ui
+    newuser.ui \
+    selectreader.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

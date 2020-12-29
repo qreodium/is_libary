@@ -95,4 +95,29 @@ void database::saveReaders()
     }
 }
 
+void database::loadRented()
+{
+    QFile file(Config::fileRented);
+    rented.clear();
+    rentedinfo tmp;
+    if (file.open(QIODevice::ReadOnly)) {
+        QDataStream ist(&file);
+        while (!ist.atEnd()) {//перебираем весь файл и записываем инф. о каждой книге
+            ist >> tmp;
+            rented.append(tmp);
+        }
+        file.close();
+    }
+}
 
+void database::saveRented()
+{
+    QFile file(Config::fileRented);
+    if (file.open(QIODevice::WriteOnly)) {
+        QDataStream ost(&file);
+        for(int i = rented.count()-1; i >= 0; i--) {//перебираем весь файл и записываем инф. о каждой книге
+            ost << rented[i];
+        }
+        file.close();
+    }
+}

@@ -24,7 +24,7 @@ void newuser::deliverUserRank(int value)
 readersinfo newuser::createReaders()
 {
     readersinfo user(ui->lineEditLastName->text(),ui->lineEditFirstName->text(),
-                     ui->lineEditPatronymic->text(),ui->lineEditReadersNumber->text().toUInt(),ui->lineEditHome->text(),ui->lineEditLogin->text(),ui->lineEditPassword->text());
+                     ui->lineEditPatronymic->text(),ui->spinBoxReaderNumber->text().toUInt(),ui->lineEditHome->text(),ui->lineEditLogin->text(),ui->lineEditPassword->text());
     return user;
 }
 

@@ -20,17 +20,6 @@ int editUser::getResult()
     return numberButton;
 }
 
-void editUser::clickedFirst()
-{
-    numberButton = 0;
-    this->accept();
-}
-
-void editUser::clickedSecond()
-{
-    numberButton = 1;
-    this->accept();
-}
 
 void editUser::clickedThird()
 {

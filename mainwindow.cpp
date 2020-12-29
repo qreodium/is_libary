@@ -5,6 +5,8 @@
 #include "newuser.h"
 #include "edituser.h"
 #include "editbook.h"
+#include "selectreader.h"
+#include "rentedinfo.h"
 #include "authentication.h"
 
 #include <QDebug>
@@ -27,6 +29,7 @@ void MainWindow::deliveryDatabase(database* _db)
 {
     db = _db;
     db->loadBooks();
+    db->loadRented();
     if(db->userRank == 0)
     {
         ui->tabWidget->removeTab(1);
@@ -36,33 +39,32 @@ void MainWindow::deliveryDatabase(database* _db)
 }
 
 
-
 void MainWindow::clickedTablePeople(int row)
 {
     editUser window;
     window.setModal(true);
     if(window.exec() == QDialog::Accepted)
     {
-        if(window.getResult()==0)
+        if(window.getResult()==0) // выдать книгу
         {
             if(ui->tablePepole->item(row,3)->text()!="Читатель")
                 QMessageBox::warning(this, "Ошибка","Нельзя выдать книгу работнику.");
         }
-        else if(window.getResult()==1)
+        else if(window.getResult()==1) // списать книгу
             {
                 if(ui->tablePepole->item(row,3)->text()!="Читатель")
                     QMessageBox::warning(this, "Ошибка","Нельзя списать книгу с работника.");
             }
-        else if(window.getResult()==2)
+        else if(window.getResult()==2) // удалить пользователя
         {
             if(ui->tablePepole->item(row,3)->text()=="Читатель")
             {
-                db->readers.removeAt(row);
+                db->readers.removeAt(ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt());
                 db->saveReaders();
             }
             else
             {
-                db->workers.removeAt(row-db->readers.count());
+                db->workers.removeAt(ui->tablePepole->item(row, 0)->data(Qt::UserRole).toUInt());
                 db->saveWorkers();
             }
             updateTables();
@@ -72,16 +74,57 @@ void MainWindow::clickedTablePeople(int row)
 
 void MainWindow::clickedTableBook(int row)
 {
-    qDebug() << "mainwindow Row: " << row;
     editBook window;
     window.setModal(true);
     if(window.exec() == QDialog::Accepted)
     {
-        qDebug() << "Accepted";
-        if(window.getResult()==2)
+        if(window.getResult()==2)// удалить книгу
         {
-            db->books.removeAt(row);
+            db->books.removeAt(ui->tableBooks->item(row, 0)->data(Qt::UserRole).toUInt());
             updateTables();
+        }
+        else if(window.getResult()==1)// списать книгу
+        {
+            bool deleted = false;
+            for(int i=0;i<db->rented.count();i++)
+            {
+                if(db->rented[i].getUniqueCode()==ui->tableBooks->item(row, 4)->text())
+                {
+                    db->rented.removeAt(i);
+                    db->saveRented();
+                    updateTables();
+                    deleted = true;
+                }
+            }
+            if(!deleted)
+                QMessageBox::warning(this, "Ошибка","Книга уже находится в библиотеке.");
+        }
+        else if(window.getResult()==0)// выдать книгу
+        {
+            bool isRented = false;
+            for(int i=0;i<db->rented.count();i++)
+            {
+                if(db->rented[i].getUniqueCode()==ui->tableBooks->item(row, 4)->text())
+                    isRented = true;
+            }
+            if(isRented)
+                QMessageBox::warning(this, "Ошибка","Книга уже забрал другой человек.");
+                else
+            {
+            selectReader windowReaders;
+            windowReaders.deliverDatabase(db);
+            windowReaders.setModal(true);
+            if(windowReaders.exec() == QDialog::Accepted)
+            {
+                int readerNumber = windowReaders.getReaderNumber();
+                QDate start = QDate::currentDate();
+                QDate stop = start.addDays(30);
+                rentedinfo tmp(ui->tableBooks->item(row, 4)->text(),readerNumber,start,stop);
+                db->rented.append(tmp);
+                db->saveRented();
+                updateTables();
+            }
+            }
         }
     }
 }
@@ -97,12 +140,32 @@ void MainWindow::updateTables()
         QTableWidgetItem *item_bookNumberOfPages = new QTableWidgetItem(QString::number(db->books[i].getNumberOfPages()));
         QTableWidgetItem *item_bookCost = new QTableWidgetItem(QString::number(db->books[i].getCost()));
         QTableWidgetItem *item_bookUniqueCode = new QTableWidgetItem(db->books[i].getUniqueCode());
+        QTableWidgetItem *item_bookReaderNumber = new QTableWidgetItem("");
+        QTableWidgetItem *item_bookStartDate = new QTableWidgetItem("");
+        QTableWidgetItem *item_bookEndDate = new QTableWidgetItem("");
+        for(int j = 0; j < db->rented.count(); j++)
+        {
+            if(db->books[i].getUniqueCode()==db->rented[j].getUniqueCode())
+            {
+                item_bookReaderNumber->setText(QString::number(db->rented[j].getReaderNumber()));
+                item_bookStartDate->setText(db->rented[j].getStart().toString(Qt::ISODate));
+                item_bookEndDate->setText(db->rented[j].getEnd().toString(Qt::ISODate));
+            }
+        }
 
+        item_bookTitle->setData(Qt::UserRole,i);
         ui->tableBooks->setItem(i,0,item_bookTitle);
         ui->tableBooks->setItem(i,1,item_bookAuthor);
+        qDebug() << item_bookNumberOfPages->text();
         ui->tableBooks->setItem(i,2,item_bookNumberOfPages);
         ui->tableBooks->setItem(i,3,item_bookCost);
         ui->tableBooks->setItem(i,4,item_bookUniqueCode);
+        ui->tableBooks->setItem(i,5,item_bookReaderNumber);
+        ui->tableBooks->setItem(i,6,item_bookStartDate);
+        ui->tableBooks->setItem(i,7,item_bookEndDate);
+
+
+
     }
 
     ui->tablePepole->setRowCount(0);
@@ -118,7 +181,7 @@ void MainWindow::updateTables()
         QTableWidgetItem *item_userHomeAddress = new QTableWidgetItem(db->workers[i].getHomeAddress());
         QTableWidgetItem *item_userReaderNumber = new QTableWidgetItem("-");
 
-
+        item_userLastName->setData(Qt::UserRole,i);
         ui->tablePepole->setItem(i,0,item_userLastName);
         ui->tablePepole->setItem(i,1,item_userFirstName);
         ui->tablePepole->setItem(i,2,item_userPatronymic);
@@ -137,7 +200,7 @@ void MainWindow::updateTables()
         QTableWidgetItem *item_userHomeAddress = new QTableWidgetItem(db->readers[i].getHomeAddress());
         QTableWidgetItem *item_userReaderNumber = new QTableWidgetItem(QString::number(db->readers[i].getReaderNumber()));
 
-
+        item_userLastName->setData(Qt::UserRole,i);
         ui->tablePepole->setItem(i,0,item_userLastName);
         ui->tablePepole->setItem(i,1,item_userFirstName);
         ui->tablePepole->setItem(i,2,item_userPatronymic);

@@ -17,8 +17,6 @@ public:
     int getResult();
 
 private slots:
-    void clickedFirst();
-    void clickedSecond();
     void clickedThird();
 
 private:

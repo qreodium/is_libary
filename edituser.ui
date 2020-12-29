@@ -15,20 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="pushButtonGiveBook">
-     <property name="text">
-      <string>Выдать книгу</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="pushButtonTakeBook">
-     <property name="text">
-      <string>Списать книгу</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QPushButton" name="pushButtonDelete">
      <property name="text">
       <string>Удалить пользователя из базы данных</string>
@@ -48,38 +34,6 @@
     <hint type="sourcelabel">
      <x>113</x>
      <y>102</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>113</x>
-     <y>66</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonGiveBook</sender>
-   <signal>clicked()</signal>
-   <receiver>editUser</receiver>
-   <slot>clickedFirst()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>113</x>
-     <y>28</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>113</x>
-     <y>66</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButtonTakeBook</sender>
-   <signal>clicked()</signal>
-   <receiver>editUser</receiver>
-   <slot>clickedSecond()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>113</x>
-     <y>65</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>

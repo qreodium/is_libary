@@ -5,6 +5,7 @@
 #include <booksinfo.h>
 #include <workersinfo.h>
 #include <readersinfo.h>
+#include <rentedinfo.h>
 #include <QList>
 
 class database : public QMainWindow
@@ -20,6 +21,7 @@ public:
     QList<booksinfo> books;
     QList<workersinfo> workers;
     QList<readersinfo> readers;
+    QList<rentedinfo> rented;
 
     explicit database(QWidget *parent = nullptr);
     void loadBooks();
@@ -28,6 +30,8 @@ public:
     void saveWorkers();
     void loadReaders();
     void saveReaders();
+    void loadRented();
+    void saveRented();
 
 signals:
 

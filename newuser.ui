@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>451</width>
-    <height>424</height>
+    <width>443</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -78,7 +78,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEditReadersNumber"/>
+    <widget class="QSpinBox" name="spinBoxReaderNumber">
+     <property name="buttonSymbols">
+      <enum>QAbstractSpinBox::NoButtons</enum>
+     </property>
+     <property name="maximum">
+      <number>999999999</number>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="labelHome">
