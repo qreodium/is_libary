@@ -6,7 +6,6 @@
 namespace Config
 {
     static const QString nameApplication = "Библиотека";
-
     static const QString fileRented = "rented.bin";
     static const QString fileWorkers = "workers.bin";
     static const QString fileBooks = "books.bin";

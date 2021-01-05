@@ -9,15 +9,23 @@ namespace Ui {
 class authentication;
 }
 
+//!
+//! \brief Класс авторизации в системе
+//!
 class authentication : public QDialog
 {
     Q_OBJECT
 
 public:
+    //! Конструктор
     explicit authentication(QWidget *parent = nullptr);
+    //! Деструктор
     ~authentication();
 
 private slots:
+    //!
+    //! \brief Слот для проверки пароля
+    //!
     void checkPassword();
 
 private:

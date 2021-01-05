@@ -1,0 +1,74 @@
+\hypertarget{classdatabase}{}\doxysection{database Class Reference}
+\label{classdatabase}\index{database@{database}}
+
+
+Класс обрабатывающий все данные системы  
+
+
+
+
+{\ttfamily \#include $<$database.\+h$>$}
+
+Inheritance diagram for database\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdatabase}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdatabase_ab144ea47bca8bd453f7f3730f2063f20}\label{classdatabase_ab144ea47bca8bd453f7f3730f2063f20}} 
+{\bfseries database} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{classdatabase_a5b58f871fc7459395288e77bbb42bf9f}\label{classdatabase_a5b58f871fc7459395288e77bbb42bf9f}} 
+void \mbox{\hyperlink{classdatabase_a5b58f871fc7459395288e77bbb42bf9f}{load\+Books}} ()
+\begin{DoxyCompactList}\small\item\em Загрузить базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a61550605c53391bf784c33a84e546290}\label{classdatabase_a61550605c53391bf784c33a84e546290}} 
+void \mbox{\hyperlink{classdatabase_a61550605c53391bf784c33a84e546290}{save\+Books}} ()
+\begin{DoxyCompactList}\small\item\em Сохраняет базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_af9f2f48c5141f21a28636acb93b47b56}\label{classdatabase_af9f2f48c5141f21a28636acb93b47b56}} 
+void \mbox{\hyperlink{classdatabase_af9f2f48c5141f21a28636acb93b47b56}{load\+Workers}} ()
+\begin{DoxyCompactList}\small\item\em Загрузить базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a6f77cf84cd6b456969bffe0b9f38d371}\label{classdatabase_a6f77cf84cd6b456969bffe0b9f38d371}} 
+void \mbox{\hyperlink{classdatabase_a6f77cf84cd6b456969bffe0b9f38d371}{save\+Workers}} ()
+\begin{DoxyCompactList}\small\item\em Сохраняет базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a0b271f30c1283d5248a234e18fdf24b2}\label{classdatabase_a0b271f30c1283d5248a234e18fdf24b2}} 
+void \mbox{\hyperlink{classdatabase_a0b271f30c1283d5248a234e18fdf24b2}{load\+Readers}} ()
+\begin{DoxyCompactList}\small\item\em Загрузить базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a4a1434df40a8f2240ee2dce65889c135}\label{classdatabase_a4a1434df40a8f2240ee2dce65889c135}} 
+void \mbox{\hyperlink{classdatabase_a4a1434df40a8f2240ee2dce65889c135}{save\+Readers}} ()
+\begin{DoxyCompactList}\small\item\em Сохраняет базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_acf01704b3bc31fd3568eb15dc14eb1f4}\label{classdatabase_acf01704b3bc31fd3568eb15dc14eb1f4}} 
+void \mbox{\hyperlink{classdatabase_acf01704b3bc31fd3568eb15dc14eb1f4}{load\+Rented}} ()
+\begin{DoxyCompactList}\small\item\em Загрузить базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a5a8b7e8024297fee3ba2ec06573e4dd0}\label{classdatabase_a5a8b7e8024297fee3ba2ec06573e4dd0}} 
+void \mbox{\hyperlink{classdatabase_a5a8b7e8024297fee3ba2ec06573e4dd0}{save\+Rented}} ()
+\begin{DoxyCompactList}\small\item\em Сохраняет базу данных из файла, прописанного в \mbox{\hyperlink{config_8h_source}{config.\+h}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdatabase_a0a9f9afd27fec5191e5315cbd49764d0}\label{classdatabase_a0a9f9afd27fec5191e5315cbd49764d0}} 
+int \mbox{\hyperlink{classdatabase_a0a9f9afd27fec5191e5315cbd49764d0}{user\+Rank}} = 0
+\begin{DoxyCompactList}\small\item\em Переменная, в которой хранится должность текущего пользователя \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a6ad901fef07e2798cd8e27ddf73b986f}\label{classdatabase_a6ad901fef07e2798cd8e27ddf73b986f}} 
+QList$<$ \mbox{\hyperlink{classbooksinfo}{booksinfo}} $>$ \mbox{\hyperlink{classdatabase_a6ad901fef07e2798cd8e27ddf73b986f}{books}}
+\begin{DoxyCompactList}\small\item\em Структура, содержащая информацию о всех книгах \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_ad3d5ecdf9644a929dc098065b1381f1b}\label{classdatabase_ad3d5ecdf9644a929dc098065b1381f1b}} 
+QList$<$ \mbox{\hyperlink{classworkersinfo}{workersinfo}} $>$ \mbox{\hyperlink{classdatabase_ad3d5ecdf9644a929dc098065b1381f1b}{workers}}
+\begin{DoxyCompactList}\small\item\em Структура, содержащая информацию о всех работниках \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a2ebd3a2cb36de2defb822dc28b3eef8e}\label{classdatabase_a2ebd3a2cb36de2defb822dc28b3eef8e}} 
+QList$<$ \mbox{\hyperlink{classreadersinfo}{readersinfo}} $>$ \mbox{\hyperlink{classdatabase_a2ebd3a2cb36de2defb822dc28b3eef8e}{readers}}
+\begin{DoxyCompactList}\small\item\em Структура, содержащая информацию о всех читателях \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classdatabase_a28168c365fb345646cc46bc47b3ed0ec}\label{classdatabase_a28168c365fb345646cc46bc47b3ed0ec}} 
+QList$<$ \mbox{\hyperlink{classrentedinfo}{rentedinfo}} $>$ \mbox{\hyperlink{classdatabase_a28168c365fb345646cc46bc47b3ed0ec}{rented}}
+\begin{DoxyCompactList}\small\item\em Структура, содержащая информацию о всех взятых книгах \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс обрабатывающий все данные системы 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+database.\+h\item 
+database.\+cpp\end{DoxyCompactItemize}

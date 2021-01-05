@@ -25,6 +25,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::deliveryDatabase(database* _db)
 {
     db = _db;
@@ -37,7 +38,6 @@ void MainWindow::deliveryDatabase(database* _db)
     }
     updateTables();
 }
-
 
 void MainWindow::clickedTablePeople(int row)
 {

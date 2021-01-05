@@ -1,0 +1,7 @@
+\hypertarget{authentication_8cpp}{}\doxysection{authentication.\+cpp File Reference}
+\label{authentication_8cpp}\index{authentication.cpp@{authentication.cpp}}
+{\ttfamily \#include \char`\"{}authentication.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ui\+\_\+authentication.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mainwindow.\+h\char`\"{}}\newline
+Include dependency graph for authentication.\+cpp\+:
+% FIG 0

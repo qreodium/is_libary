@@ -1,0 +1,7 @@
+digraph "booksinfo"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{booksinfo\n||+ booksinfo()\l+ booksinfo()\l+ setData()\l+ getBookTitle()\l+ setBookTitle()\l+ getAuthor()\l+ setAuthor()\l+ getNumberOfPages()\l+ setNumberOfPages()\l+ getCost()\l+ setCost()\l+ getUniqueCode()\l+ setUniqueCode()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}
